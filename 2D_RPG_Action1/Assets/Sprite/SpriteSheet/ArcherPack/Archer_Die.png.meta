@@ -1,0 +1,506 @@
+fileFormatVersion: 2
+guid: f5b6e247911664f1f946065bbdfb4277
+timeCreated: 1435452209
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Archer_Die_0
+    21300002: Archer_Die_1
+    21300004: Archer_Die_2
+    21300006: Archer_Die_3
+    21300008: Archer_Die_4
+    21300010: Archer_Die_5
+    21300012: Archer_Die_6
+    21300014: Archer_Die_7
+    21300016: Archer_Die_8
+    21300018: Archer_Die_9
+    21300020: Archer_Die_10
+    21300022: Archer_Die_11
+    21300024: Archer_Die_12
+    21300026: Archer_Die_13
+    21300028: Archer_Die_14
+    21300030: Archer_Die_15
+    21300032: Archer_Die_16
+    21300034: Archer_Die_17
+    21300036: Archer_Die_18
+    21300038: Archer_Die_19
+    21300040: Archer_Die_20
+    21300042: Archer_Die_21
+    21300044: Archer_Die_22
+    21300046: Archer_Die_23
+    21300048: Archer_Die_24
+    21300050: Archer_Die_25
+    21300052: Archer_Die_26
+    21300054: Archer_Die_27
+    21300056: Archer_Die_28
+    21300058: Archer_Die_29
+    21300060: Archer_Die_30
+    21300062: Archer_Die_31
+    21300064: Archer_Die_32
+    21300066: Archer_Die_33
+    21300068: Archer_Die_34
+    21300070: Archer_Die_35
+    21300072: Archer_Die_36
+    21300074: Archer_Die_37
+    21300076: Archer_Die_38
+    21300078: Archer_Die_39
+    21300080: Archer_Die_40
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Archer_Die_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1621
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_1
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 1621
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_2
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 1621
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_3
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 1621
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_4
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 1621
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_5
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 1621
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_6
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 1621
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1327
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_8
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 1327
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_9
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 1327
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_10
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 1327
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_11
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 1327
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_12
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 1327
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_13
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 1327
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1033
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_15
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 1033
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_16
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 1033
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_17
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 1033
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_18
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 1033
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_19
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 1033
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_20
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 1033
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 739
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_22
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 739
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_23
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 739
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_24
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 739
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_25
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 739
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_26
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 739
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_27
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 739
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 445
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_29
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 445
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_30
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 445
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_31
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 445
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_32
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 445
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_33
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 445
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_34
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 445
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 151
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_36
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 151
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_37
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 151
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_38
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 151
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_39
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 151
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Die_40
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 151
+        width: 271
+        height: 292
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
