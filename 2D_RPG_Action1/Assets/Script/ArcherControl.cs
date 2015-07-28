@@ -79,10 +79,10 @@ public class ArcherControl : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			SetStatus(Status.Attack, 0); //멈춰서 쏜다.
 		}
-		else if(Input.GetKeyDown(KeyCode.F)){
+		else if(Input.GetKeyDown (KeyCode.F)){
 			SetStatus(Status.Dead, 0);
 		}
-		else if(Input.GetKeyDown(KeyCode.I)){
+		else if(Input.GetKeyDown (KeyCode.I)){
 			SetStatus(Status.Idle, 0);
 		}
 	}
@@ -105,13 +105,13 @@ public class ArcherControl : MonoBehaviour {
 			break;
 
 		case Status.Dead:
-			mAnimator.SetFloat("Speed",0);
-			mBackgrounds.FlowControl(0);
-			mForegrounds.FlowControl(0);
+			mAnimator.SetTrigger("Die");
+			Debug.Log("Die");
 			break;
 
 		case Status.Attack:
 			mAnimator.SetTrigger("Shoot");
+			Debug.Log("shoot!");
 			break;
 		}
 	}
