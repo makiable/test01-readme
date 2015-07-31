@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 	
-	public ArcherControl mArcher;
+	public ArcherControl mArcher; //게임 매니저에서 아처 컨트롤을 합니다. 맞을 때 죽을때 체크를 해야되기 때문.
 	[HideInInspector]
-	public List<MonsterControl> mMonster;
+	public List<MonsterControl> mMonster; //여러마리 몬스터를 관리 합니다.
 	
 	// 오토 타겟이 된 몬스터를 참조합니다.
 	[HideInInspector]
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		// 적 몬스터 들이 담길 List
 		mMonster = new List<MonsterControl>();
-		mMonster.Clear();
+		mMonster.Clear(); // 초기화..
 		// 던전 탐험 스텝을 만들어서 순서대로 순환시킵니다.
 		StartCoroutine("AutoStep");
 	}
@@ -57,18 +57,16 @@ public class GameManager : MonoBehaviour {
 			}
 			else if(mStatus == Status.Run)
 			{
-				Debug.Log("1");
 
 				// 아처의 애니메이션 상태를 달리기로 설정합니다.
 				mArcher.SetStatus(ArcherControl.Status.Run, 1);
-				Debug.Log("2");
-
+		
 				// mRunTime 후 배틀대기 상태로 돌입합니다.
 				yield return new WaitForSeconds(mRunTime);
-				Debug.Log("3");
+
 
 				mStatus = Status.BattleIdle;
-				Debug.Log("4");
+			
 
 			}
 			else if(mStatus == Status.BattleIdle)
@@ -77,7 +75,7 @@ public class GameManager : MonoBehaviour {
 				mArcher.SetStatus(ArcherControl.Status.Idle, 0);
 				mMonster.Clear();
 				for(int i=0;i<3;++i)
-				{
+				{	
 					// 3마리의 몬스터를 Spawn 합니다.
 					SpawnMonster(i);
 					// 0.12 초 간격으로 for문을 순환합니다.
@@ -86,7 +84,7 @@ public class GameManager : MonoBehaviour {
 				
 				// 몬스터 3마리를 모두 Spawn 하고 2초를 대기 합니다.
 				yield return new WaitForSeconds(2);
-				
+
 				// 배틀 상태로 돌입합니다.
 				mStatus = Status.Battle;
 				
@@ -112,6 +110,7 @@ public class GameManager : MonoBehaviour {
 		
 		// 생성된 인스턴스에서 MonsterControl 컴포넌트를 불러내어 mMonster 리스트에 Add 시킵니다.
 		mMonster.Add(monster.GetComponent<MonsterControl>());
+
 		
 		// 생성된 몬스터 만큼 카운팅 됩니다.
 		mMonsterCount += 1;
@@ -137,7 +136,8 @@ public class GameManager : MonoBehaviour {
 			yield return new WaitForSeconds(mArcher.mAttackSpeed);
 		}
 	}
-	
+
+
 	private void GetAutoTarget()
 	{
 		// Hp가 가장 낮은 몬스터를 타겟팅 합니다.
@@ -192,6 +192,8 @@ public class GameManager : MonoBehaviour {
 				// 등록된 모든 몬스터는 공격 애니메이션 상태로
 				if(monster.mStatus == MonsterControl.Status.Dead) continue;
 				monster.mAnimator.SetTrigger("Shoot");
+				Debug.Log("monster shoot");
+
 				
 				yield return new WaitForSeconds(monster.mAttackSpeed + Random.Range(0, 0.5f));
 				// 몬스터의 공격스피드 + 랜덤 값

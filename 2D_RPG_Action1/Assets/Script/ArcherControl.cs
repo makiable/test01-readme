@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ArcherControl : MonoBehaviour {
 
+	public GameManager mGameManager;
+
 	// 아처의 Animator를 컨트롤할 변수.
 	private Animator mAnimator; //mAnimator를 선언.
 
@@ -119,9 +121,8 @@ public class ArcherControl : MonoBehaviour {
 	private void ShootArrow()
 	{
 		Debug.Log ("shoot!");
-		//화살 프리팹을 인스턴스 화 합니다. 프리펩을 가져와서 인스턴스 처럼 쓴다는 이야기.
-		//GameObject arrow = Instantiate (mArrowPrefab, mAttackSpot.position, Quaternion.identity) as GameObject;
-		//arrow.SendMessage ("Shoot!");
+		GameObject arrow = Instantiate (mArrowPrefeb, mAttackSpot.position, Quaternion.identity) as GameObject; //프리렙에서 게임오브젝트로 붙일때..
+		arrow.SendMessage ("Shoot", mGameManager.TargetMonster);
 	}
 }
 
