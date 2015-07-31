@@ -55,7 +55,7 @@ public class MonsterControl : MonoBehaviour{
 	public void Hit()
 	{
 		GameObject archer = GameObject.Find("Archer");	
-		ArcherControl archercontrol = archer.GetComponent<ArcherControl>();
+		//ArcherControl archercontrol = archer.GetComponent<ArcherControl>();
 		//mHP -= archercontrol.GetRandomDamage();
 
 		mAnimator.SetTrigger("Damage");

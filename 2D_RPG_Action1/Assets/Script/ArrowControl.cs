@@ -21,8 +21,7 @@ public class ArrowControl : MonoBehaviour {
 		iTween.MoveTo (gameObject, iTween.Hash ("position", monster.transform.position + new Vector3 (randomPos.x, randomPos.y, 0), "easetype", 
 		                                      iTween.EaseType.easeOutCubic, "time", 0.3f));
 	}
-
-
+	
 	void OnTriggerEnter(Collider other){
 		//몬스터 충돌체와 충돌시 충돌정보가 전달 됩니다.
 

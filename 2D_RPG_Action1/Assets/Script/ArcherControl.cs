@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ArcherControl : MonoBehaviour {
@@ -28,7 +28,9 @@ public class ArcherControl : MonoBehaviour {
 	public float mAttackSpeed;
 
 	//화살의 프리펩 참조.
-	public Object mArrowPrefeb;
+	public GameObject mArrowPrefeb;
+
+	public GameObject Spot01;
 
 	//아처의 상태 (대기, 달림, 공격, 사망)
 	public enum Status
@@ -65,8 +67,7 @@ public class ArcherControl : MonoBehaviour {
 
 		//child Gameobject 중 spot이라는 이름의 object를 찾아서 
 		//좌표값을 transform 컴퍼넌트의 형태로 하여 집어 넣습니다.
-
-		mAttackSpot = transform.FindChild ("spot");
+		mAttackSpot = transform.FindChild ("Spot");
 	}
 	
 	// Update is called once per frame
@@ -121,7 +122,11 @@ public class ArcherControl : MonoBehaviour {
 	private void ShootArrow()
 	{
 		Debug.Log ("shoot!");
-		GameObject arrow = Instantiate (mArrowPrefeb, mAttackSpot.position, Quaternion.identity) as GameObject; //프리렙에서 게임오브젝트로 붙일때..
+		GameObject arrow = null;
+
+		//GameObject arrow = Instantiate(mArrowPrefeb, mAttackSpot.position, Quaternion.identity) as GameObject; //프리렙에서 게임오브젝트로 붙일때..
+		arrow = Instantiate (mArrowPrefeb, mAttackSpot.position, Quaternion.identity) as GameObject;
+
 		arrow.SendMessage ("Shoot", mGameManager.TargetMonster);
 	}
 }
