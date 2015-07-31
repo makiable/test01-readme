@@ -4,95 +4,207 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
-
-	public ArcherControl mArcher; //아처 클래스를 가져온다.
+	
+	public ArcherControl mArcher;
 	[HideInInspector]
 	public List<MonsterControl> mMonster;
-
-	//오토 타깃이 된 몬스터를 참조합니다.
+	
+	// 오토 타겟이 된 몬스터를 참조합니다.
 	[HideInInspector]
 	public MonsterControl TargetMonster;
-
-	//몬스터 프리펩들을 인스턴스화 할 위치 정보입니다.
+	
+	// 몬스터 프리팹들을 인스턴스화 할 위치정보입니다.
 	public Transform[] mSpawnPoint;
-
-	//던전을 탐험하는 횟수입니다.
+	
+	// 던전을 탐험하는 횟수입니다.
 	private int mLoopCount = 5;
-
-	//화면에 나타난 적의 합
+	
+	// 화면에 나타난 적의 합
 	private int mMonsterCount = 0;
-
-	//얼마만큼 뛰다가 적을 만날 것인지.
+	
+	// 얼마만큼 뛰다가 적을 만날 것인지.
 	private float mRunTime = 1.8f;
-
-	// Use this for initialization
+	
 	void Start () {
-		//적 몬스터들이 담길 List
-		mMonster = new List<MonsterControl> ();
-		mMonster.Clear ();
-
-		//던전 탐험 스텝을 만들어서 순서대로 순환 시킵니다.
-		StartCoroutine ("AutoStep");
+		// 적 몬스터 들이 담길 List
+		mMonster = new List<MonsterControl>();
+		mMonster.Clear();
+		// 던전 탐험 스텝을 만들어서 순서대로 순환시킵니다.
+		StartCoroutine("AutoStep");
 	}
 	
-	//던전의 현재 스텝
-	public enum Status{
+	// 던전의 현재 스텝
+	public enum Status
+	{
 		Idle,
 		Run,
 		BattleIdle,
 		Battle,
-		Clear
+		Clear,
 	}
-
+	
 	public Status mStatus = Status.Idle;
-
-	//오토스탭을 자동으로 실행.
+	
 	IEnumerator AutoStep()
 	{
-		while (true) { //코루틴이 계속 실행 될때..
-			if (mStatus == Status.Idle) { //아이들 상태라면.
-				yield return new WaitForSeconds (1.2f); //1.2초후 던전탐험을 시작..
-				mStatus = Status.Run; //런상태로..
-			} else if (mStatus == Status.Run) {
-				//아처의 애니메이션 상태를 달리기로 설정합니다.
-				mArcher.SetStatus (ArcherControl.Status.Run, 1);
-
-				//mRunTime 후 배틀 대기 상태로 돌입합니다.
-				yield return new WaitForSeconds (mRunTime);
-				mStatus = Status.BattleIdle;
+		while(true)
+		{
+			if(mStatus == Status.Idle)
+			{
+				// 1.2초를 대기한 후 던전 탐험을 시작합니다.
+				yield return new WaitForSeconds(1.2f);
+				mStatus = Status.Run;
 			}
+			else if(mStatus == Status.Run)
+			{
+				Debug.Log("1");
 
+				// 아처의 애니메이션 상태를 달리기로 설정합니다.
+				mArcher.SetStatus(ArcherControl.Status.Run, 1);
+				Debug.Log("2");
 
+				// mRunTime 후 배틀대기 상태로 돌입합니다.
+				yield return new WaitForSeconds(mRunTime);
+				Debug.Log("3");
+
+				mStatus = Status.BattleIdle;
+				Debug.Log("4");
+
+			}
+			else if(mStatus == Status.BattleIdle)
+			{
+				// 아처를 Run에서 Idle 상태로 전환합니다.
+				mArcher.SetStatus(ArcherControl.Status.Idle, 0);
+				mMonster.Clear();
+				for(int i=0;i<3;++i)
+				{
+					// 3마리의 몬스터를 Spawn 합니다.
+					SpawnMonster(i);
+					// 0.12 초 간격으로 for문을 순환합니다.
+					yield return new WaitForSeconds(0.12f);
+				}
+				
+				// 몬스터 3마리를 모두 Spawn 하고 2초를 대기 합니다.
+				yield return new WaitForSeconds(2);
+				
+				// 배틀 상태로 돌입합니다.
+				mStatus = Status.Battle;
+				
+				// 아처와 몬스터의 공격을 명령합니다.
+				StartCoroutine("ArcherAttack");
+				StartCoroutine("MonsterAttack");
+				yield break;
+			}
 		}
 	}
-
-
 	
-	// Update is called once per frame
-	void Update () {
+	private void SpawnMonster(int idx)
+	{
+		// Resources 폴더로부터 Monster 프리팹(Prefab)을 로드합니다.
+		Object prefab = Resources.Load("Monster");
+		
+		// 참조한 프리팹을 인스턴스화 합니다. (화면에 나타납니다.)
+		GameObject monster = Instantiate(prefab, mSpawnPoint[idx].position, Quaternion.identity) as GameObject;
+		monster.transform.parent = mSpawnPoint[idx];
+
+		Debug.Log ("idx="+idx);
+
+		
+		// 생성된 인스턴스에서 MonsterControl 컴포넌트를 불러내어 mMonster 리스트에 Add 시킵니다.
+		mMonster.Add(monster.GetComponent<MonsterControl>());
+		
+		// 생성된 몬스터 만큼 카운팅 됩니다.
+		mMonsterCount += 1;
 	
+		mMonster[idx].idx = idx;
+		mMonster[idx].RandomHP();//
+		monster.name = "Monster"+idx;
+		// 레이어 오더를 단계적으로 주어 몬스터들의 뎁스가 차례대로 겹치도록 한다.
+		monster.GetComponent<SpriteRenderer>().sortingOrder = idx+1;
+	}
+	
+	IEnumerator ArcherAttack()
+	{
+		// 아처의 타겟이 될 몬스터를 선택합니다.
+		GetAutoTarget();
+		
+		while(mStatus == Status.Battle)
+		{
+			// 아처의 공격 애니메이션
+			mArcher.SetStatus(ArcherControl.Status.Attack, 0);
+			
+			// 아처의 공격속도 만큼 대기 후 순환합니다.
+			yield return new WaitForSeconds(mArcher.mAttackSpeed);
+		}
+	}
+	
+	private void GetAutoTarget()
+	{
+		// Hp가 가장 낮은 몬스터를 타겟팅 합니다.
+		TargetMonster = mMonster.Where(m=>m.mHP > 0).OrderBy(m=>m.mHP).First();
+		
+		// 타겟은 충돌체가 준비됩니다.
+		TargetMonster.SetTarget();
+	}
+	
+	public void ReAutoTarget()
+	{
+		// 타겟을 재 탐색합니다.
+		
+		mMonsterCount -= 1;
+		TargetMonster = null;
+		if(mMonsterCount == 0)
+		{
+			// 몬스터를 모두 클리어 하였습니다.
+			Debug.Log ("Clear");
+			
+			mLoopCount -= 1;
+			
+			// 모든 공격과 스텝을 중지시킵니다.
+			StopCoroutine("ArcherAttack");
+			StopCoroutine("MonsterAttack");
+			StopCoroutine("AutoStep");
+			
+			if(mLoopCount == 0)
+			{
+				// 모든 스테이지가 클리어 되었습니다.
+				Debug.Log("Stage All Clear");
+				GameOver();
+				return;
+			}
+			
+			// 던전 스텝을 초기화 시키고 다시 순환 시킵니다.
+			mStatus = Status.Idle;
+			StartCoroutine("AutoStep");
+			return;
+		}
+		
+		// 타겟 재 탐색
+		GetAutoTarget();
+	}
+	
+	IEnumerator MonsterAttack()
+	{
+		while(mStatus == Status.Battle)
+		{
+			foreach(MonsterControl monster in mMonster)
+			{
+				// 등록된 모든 몬스터는 공격 애니메이션 상태로
+				if(monster.mStatus == MonsterControl.Status.Dead) continue;
+				monster.mAnimator.SetTrigger("Shoot");
+				
+				yield return new WaitForSeconds(monster.mAttackSpeed + Random.Range(0, 0.5f));
+				// 몬스터의 공격스피드 + 랜덤 값
+			}
+		}
+	}
+	
+	public void GameOver()
+	{
+		// 주인공이 사망했거나 모든 스테이지 클리어
+		Debug.Log("GameOver");	
+		StopCoroutine("ArcherAttack");
+		StopCoroutine("MonsterAttack");
+		StopCoroutine("AutoStep");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

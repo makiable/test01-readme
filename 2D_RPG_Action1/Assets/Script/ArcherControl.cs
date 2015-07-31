@@ -70,21 +70,21 @@ public class ArcherControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//키보드의 left, right 좌표를 값을 가져옵니다.
-		float speed = Mathf.Abs(Input.GetAxis("Horizontal")); //Horizontal은 화살표 좌우로..
+		//float speed = Mathf.Abs(Input.GetAxis("Horizontal")); //Horizontal은 화살표 좌우로..
 
-		SetStatus (Status.Run, speed);
-		mBackgrounds.FlowControl (speed);
-		mForegrounds.FlowControl (speed);
+		//SetStatus (Status.Run, speed);
+		//mBackgrounds.FlowControl (speed);
+		//mForegrounds.FlowControl (speed);
 
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			SetStatus(Status.Attack, 0); //멈춰서 쏜다.
-		}
-		else if(Input.GetKeyDown (KeyCode.F)){
-			SetStatus(Status.Dead, 0);
-		}
-		else if(Input.GetKeyDown (KeyCode.I)){
-			SetStatus(Status.Idle, 0);
-		}
+		//if (Input.GetKeyDown (KeyCode.Space)) {
+		//	SetStatus(Status.Attack, 0); //멈춰서 쏜다.
+		//}
+		//else if(Input.GetKeyDown (KeyCode.F)){
+		//	SetStatus(Status.Dead, 0);
+		//}
+		//else if(Input.GetKeyDown (KeyCode.I)){
+		//	SetStatus(Status.Idle, 0);
+		//}
 	}
 
 	//상테와 파라메터를 통해 아처의 상태를 컨트롤 합니다.
