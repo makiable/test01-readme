@@ -51,8 +51,12 @@
      <Compile Include="Assets\Script\BackgroundControl.cs" />
      <Compile Include="Assets\Script\FireControl.cs" />
      <Compile Include="Assets\Script\GameManager.cs" />
+     <Compile Include="Assets\Script\HpControl.cs" />
+     <Compile Include="Assets\Script\HudText.cs" />
+     <Compile Include="Assets\Script\LayerSort.cs" />
      <Compile Include="Assets\Script\MonsterControl.cs" />
      <Compile Include="Assets\Script\RotateSimple.cs" />
+     <Compile Include="Assets\Script\TextOutline.cs" />
      <Compile Include="Assets\Script\iTween.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

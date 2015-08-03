@@ -21,6 +21,9 @@ public class MonsterControl : MonoBehaviour{
 	
 	// 몬스터가 사용할 파이얼 볼 프리팹
 	private Object mFirePrefab;
+
+	//HP바 사용.
+	public HpControl mHpControl;
 	
 	// 몬스터의 상태
 	public enum Status
@@ -37,6 +40,7 @@ public class MonsterControl : MonoBehaviour{
 		// 참조해야할 객체나 스크립트들을 여기서 설정하게 될 것입니다.
 		mGameManager = GameManager.FindObjectOfType<GameManager>();
 		mFirePrefab = Resources.Load ("FireBall") as GameObject;
+		mHpControl.SetHp(mHP); // 채력을 가져와서 넣는당.
 	}
 	
 	// 생성될 몬스터들은 현재 체력 +- 10의 랜덤 체력을 가지게 됩니다.
@@ -54,18 +58,37 @@ public class MonsterControl : MonoBehaviour{
 	// 피격 당할 경우 데미지 처리와 애니메이션 처리
 	public void Hit()
 	{
-		Debug.Log ("monster hitted");
-
 		GameObject archer = GameObject.Find ("Archer");
 		ArcherControl archercontrol = archer.GetComponent<ArcherControl> ();
 
-		mHP -= archercontrol.GetRandomDamage ();
-		mAnimator.SetTrigger ("Damage");
+		// 테스트 문구..
+		//mHP -= archercontrol.GetRandomDamage ();
+	
+		//HP바를 보여주기 위한 ui 및 크리티컬 작업.
+		int damage;
+		if (archercontrol.IsCritical) {
+			damage = archercontrol.GetRandomDamage() * 2;
+			Debug.Log("Critical!!!");
+			print(damage);
+		}
+		else {
+			damage = archercontrol.GetRandomDamage();
+			print(damage);
+		}
 
+		mHP -= damage;
+		mHpControl.Hit (damage);
+
+		//허드 추가
+		HudText (damage, transform.position + new Vector3 (0, 0.7f, 0), archercontrol.IsCritical);
+
+		mAnimator.SetTrigger ("Damage");
 
 		// 사망처리
 		if(mHP <= 0)
 		{
+			Debug.Log("몬스터 사망 ");
+			print(mHP);
 			mStatus = Status.Dead;
 			mHP = 0;
 			mCollider.enabled = false;
@@ -73,6 +96,8 @@ public class MonsterControl : MonoBehaviour{
 			mGameManager.ReAutoTarget();
 			Destroy(gameObject, 1f);
 		}
+
+
 	}
 	
 	// 파이어볼 프리팹을 인스턴스(Instance)화 해서 사용합니다.
@@ -85,6 +110,18 @@ public class MonsterControl : MonoBehaviour{
 		GameObject fire = Instantiate (mFirePrefab, mFireShootSpot.position, Quaternion.identity) as GameObject;
 		fire.SendMessage ("Shoot", this);
 
+	}
+
+	private void HudText(int damage, Vector3 pos, bool isCritical){
+		GameObject prefab = Resources.Load ("HUDTEXT") as GameObject;
+		GameObject hudtext = Instantiate (prefab, pos, Quaternion.identity) as GameObject;
+
+		if (isCritical) {
+			hudtext.GetComponent<HudText>().setHudText("Critical!! \n" + damage, new Color(255, 216, 0, 255),35);
+		}
+		else {
+			hudtext.GetComponent<HudText>().setHudText(damage.ToString(),new Color(255,255,255,255), 30);
+		}
 	}
 
 

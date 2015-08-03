@@ -29,8 +29,12 @@ public class ArcherControl : MonoBehaviour {
 
 	//화살의 프리펩 참조.
 	public GameObject mArrowPrefeb;
-
 	public GameObject Spot01;
+
+	public HpControl mHPContorl;
+	[HideInInspector]
+	public bool IsCritical = false;
+
 
 	//아처의 상태 (대기, 달림, 공격, 사망)
 	public enum Status
@@ -68,6 +72,9 @@ public class ArcherControl : MonoBehaviour {
 		//child Gameobject 중 spot이라는 이름의 object를 찾아서 
 		//좌표값을 transform 컴퍼넌트의 형태로 하여 집어 넣습니다.
 		mAttackSpot = transform.FindChild ("Spot");
+
+		mHPContorl.SetHp (mHP);
+
 	}
 	
 	// Update is called once per frame
@@ -103,6 +110,7 @@ public class ArcherControl : MonoBehaviour {
 
 		case Status.Run:
 			mAnimator.SetFloat("Speed", parameter);
+			mHPContorl.Invisible();
 			mBackgrounds.FlowControl(1);
 			mForegrounds.FlowControl(1);
 			break;
@@ -113,8 +121,10 @@ public class ArcherControl : MonoBehaviour {
 			break;
 
 		case Status.Attack:
+			mHPContorl.gameObject.SetActive(true);
 			mAnimator.SetTrigger("Shoot");
-			Debug.Log("shoot!");
+
+
 			break;
 		}
 	}
@@ -136,6 +146,10 @@ public class ArcherControl : MonoBehaviour {
 		//데미지를 누적 시킵니다.
 		mHP -= damage;
 
+		HudText (damage, transform.position + new Vector3 (0, 3.1f, 0));
+
+		mHPContorl.Hit (damage);
+
 		if (mHP > 0) {
 			mAnimator.SetTrigger("Damaged");
 		}
@@ -149,6 +163,25 @@ public class ArcherControl : MonoBehaviour {
 			mGameManager.GameOver();
 
 		}
+	}
+
+	public void isCritical(){
+		int random = Random.Range (0, 10);
+		if (random < 2) {
+			IsCritical = true;
+			Debug.Log("Critical");
+		}
+		else {
+			IsCritical = false;
+		}
+	}
+
+	private void HudText(int damage, Vector3 pos){
+		GameObject prefab = Resources.Load ("HUDTEXT") as GameObject;
+		GameObject hudtext = Instantiate (prefab, pos, Quaternion.identity) as GameObject;
+		
+		hudtext.GetComponent<HudText>().setHudText(damage.ToString(),new Color(255,255,255,255),30);
+
 	}
 
 }
