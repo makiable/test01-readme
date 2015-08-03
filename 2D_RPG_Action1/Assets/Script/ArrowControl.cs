@@ -25,12 +25,20 @@ public class ArrowControl : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		//몬스터 충돌체와 충돌시 충돌정보가 전달 됩니다.
 
-		if (other.name == "monster") {
+		Debug.Log ("Collider check");
+
+		if (other.tag == "Monster") {
 			mCollider.enabled = false;
 			mMonster.Hit(); //힛함수 실행.
+			Debug.Log ("name check");
 
 			//화살 오브젝트를 0.07초 후 파괴합니다.
 			Destroy(gameObject, 0.07f);
 		}
 	}
+
+	void Update(){
+
+	}
+
 }

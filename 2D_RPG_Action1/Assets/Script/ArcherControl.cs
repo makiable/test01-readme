@@ -121,14 +121,36 @@ public class ArcherControl : MonoBehaviour {
 
 	private void ShootArrow()
 	{
-		Debug.Log ("shoot!");
 		GameObject arrow = null;
-
-		//GameObject arrow = Instantiate(mArrowPrefeb, mAttackSpot.position, Quaternion.identity) as GameObject; //프리렙에서 게임오브젝트로 붙일때..
+		//프리렙에서 게임오브젝트로 붙일때..
 		arrow = Instantiate (mArrowPrefeb, mAttackSpot.position, Quaternion.identity) as GameObject;
 
 		arrow.SendMessage ("Shoot", mGameManager.TargetMonster);
 	}
+
+	public int GetRandomDamage(){
+		return mAttack + Random.Range (0, 20);
+	}
+
+	public void Hit(int damage){
+		//데미지를 누적 시킵니다.
+		mHP -= damage;
+
+		if (mHP > 0) {
+			mAnimator.SetTrigger("Damaged");
+		}
+
+
+		if (mHP <= 0) {
+			//사망 처리 
+			mStatus = Status.Dead;
+			mHP = 0;
+			mAnimator.SetTrigger("Die");
+			mGameManager.GameOver();
+
+		}
+	}
+
 }
 
 

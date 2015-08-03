@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MonsterControl : MonoBehaviour{
 
-	private GameManager mGameManager;
+	private GameManager mGameManager; // 게임 매니저에서 컨트롤 하도록.
 	public Animator mAnimator; // 자신의 애니메이터를 참조할 변수
 	
 	// 생성될 몬스터의 인덱스, 체력, 공격력, 공격속도
@@ -35,8 +35,8 @@ public class MonsterControl : MonoBehaviour{
 	void Start()
 	{
 		// 참조해야할 객체나 스크립트들을 여기서 설정하게 될 것입니다.
-		mFirePrefab = Resources.Load("FireBall") as GameObject;
-		mGameManager = GameObject.FindObjectOfType<GameManager>();	
+		mGameManager = GameManager.FindObjectOfType<GameManager>();
+		mFirePrefab = Resources.Load ("FireBall") as GameObject;
 	}
 	
 	// 생성될 몬스터들은 현재 체력 +- 10의 랜덤 체력을 가지게 됩니다.
@@ -54,12 +54,15 @@ public class MonsterControl : MonoBehaviour{
 	// 피격 당할 경우 데미지 처리와 애니메이션 처리
 	public void Hit()
 	{
-		GameObject archer = GameObject.Find("Archer");	
-		//ArcherControl archercontrol = archer.GetComponent<ArcherControl>();
-		//mHP -= archercontrol.GetRandomDamage();
+		Debug.Log ("monster hitted");
 
-		mAnimator.SetTrigger("Damage");
-		
+		GameObject archer = GameObject.Find ("Archer");
+		ArcherControl archercontrol = archer.GetComponent<ArcherControl> ();
+
+		mHP -= archercontrol.GetRandomDamage ();
+		mAnimator.SetTrigger ("Damage");
+
+
 		// 사망처리
 		if(mHP <= 0)
 		{
@@ -76,8 +79,48 @@ public class MonsterControl : MonoBehaviour{
 	private void ShootFire()
 	{
 		// 파이어볼 프리팹을 씬에 인스턴스화 하는 과정을 작성하게 됩니다.
-		GameObject fire = Instantiate(mFirePrefab, mFireShootSpot.position, Quaternion.identity) as GameObject;
-		fire.SendMessage("Shoot", this);
+		//GameObject fire = Instantiate(mFirePrefab, mFireShootSpot.position, Quaternion.identity) as GameObject;
+		//fire.SendMessage("Shoot", this);
+
+		GameObject fire = Instantiate (mFirePrefab, mFireShootSpot.position, Quaternion.identity) as GameObject;
+		fire.SendMessage ("Shoot", this);
 
 	}
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
