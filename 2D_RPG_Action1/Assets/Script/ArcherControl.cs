@@ -16,6 +16,8 @@ public class ArcherControl : MonoBehaviour {
 	[HideInInspector]
 	private Transform mAttackSpot;
 
+	public Transform mArcher_damage_Spot;
+
 	//아처의 공격력, 채력, 공격 속도에 사용 될 변수.
 	public int mOrinHP;
 	[HideInInspector]
@@ -146,9 +148,8 @@ public class ArcherControl : MonoBehaviour {
 		//데미지를 누적 시킵니다.
 		mHP -= damage;
 
-		HudText (damage, transform.position + new Vector3 (0, 3.1f, 0));
-		print ("Archer-> x, y, z"+transform.position.x+" "+transform.position.y+" "+transform.position.z);
 
+		HudText (damage, transform.position + new Vector3 (0, 3.1f, 0));
 
 		mHPContorl.Hit (damage);
 
@@ -179,13 +180,12 @@ public class ArcherControl : MonoBehaviour {
 	}
 
 	private void HudText(int damage, Vector3 pos){
-		GameObject prefab = Resources.Load ("HudText 1") as GameObject;
+
+		GameObject prefab = Resources.Load ("HudText") as GameObject;
 		GameObject hudtext = Instantiate (prefab, pos, Quaternion.identity) as GameObject;
-		
-		hudtext.GetComponent<HudText>().setHudText(damage.ToString(),new Color(255,255,255,255),30);
-		print ("1 monster-> x, y, z"+hudtext.transform.position.x+" "+hudtext.transform.position.y+" "+hudtext.transform.position.z);
 
-
+		hudtext.GetComponent<HudText>().SetHudText(damage.ToString(), new Color(255,255,255,255),28);
+	
 
 	}
 

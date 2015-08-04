@@ -105,9 +105,7 @@ public class GameManager : MonoBehaviour {
 		GameObject monster = Instantiate(prefab, mSpawnPoint[idx].position, Quaternion.identity) as GameObject;
 		monster.transform.parent = mSpawnPoint[idx];
 
-		Debug.Log ("idx="+idx);
-
-		
+			
 		// 생성된 인스턴스에서 MonsterControl 컴포넌트를 불러내어 mMonster 리스트에 Add 시킵니다.
 		mMonster.Add(monster.GetComponent<MonsterControl>());
 

@@ -15,6 +15,8 @@ public class MonsterControl : MonoBehaviour{
 	
 	// 몬스터가 발사할 파이어볼의 발사 지점
 	public Transform mFireShootSpot;
+
+	public Transform monsterHud;
 	
 	// 몬스터의 피격 설정을 위한 콜라이더
 	public Collider mCollider;
@@ -40,6 +42,7 @@ public class MonsterControl : MonoBehaviour{
 		mFirePrefab = Resources.Load("FireBall") as GameObject;
 		mGameManager = GameObject.FindObjectOfType<GameManager>();	
 		mHpControl.SetHp(mHp);
+
 	}
 	
 	// 생성될 몬스터들은 현재 체력 +- 10의 랜덤 체력을 가지게 됩니다.
@@ -70,9 +73,13 @@ public class MonsterControl : MonoBehaviour{
 		}
 		mHp -= damage;
 		mHpControl.Hit(damage);		
+
+		print ("1. transform.position="+transform.position);
 		
 		HudText(damage, transform.position + new Vector3(0, .7f, 0), archercontrol.IsCritical);
 		
+		print ("2. transform.position="+transform.position);
+
 		mAnimator.SetTrigger("Damage");
 		
 		// 사망처리
@@ -90,14 +97,17 @@ public class MonsterControl : MonoBehaviour{
 	
 	private void HudText(int damage, Vector3 pos, bool isCritical)
 	{
-		GameObject prefab = Resources.Load("HudText 1") as GameObject;
+		GameObject prefab = Resources.Load("HudText") as GameObject;
 		GameObject hudtext = Instantiate(prefab, pos, Quaternion.identity) as GameObject;
+
+		print ("pos="+pos);
+
 		if(isCritical)
 		{
-			hudtext.GetComponent<HudText>().setHudText("Critical!!\n"+damage, new Color(255, 216, 0, 255), 35);
+			hudtext.GetComponent<HudText>().SetHudText("Critical!!\n"+damage, new Color(255, 216, 0, 255), 35);
 		}
 		else{
-			hudtext.GetComponent<HudText>().setHudText(damage.ToString(), new Color(255, 255, 255, 255), 30);
+			hudtext.GetComponent<HudText>().SetHudText(damage.ToString(), new Color(0	, 0, 255, 255), 30);
 		}
 	}
 	
