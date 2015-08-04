@@ -147,6 +147,8 @@ public class ArcherControl : MonoBehaviour {
 		mHP -= damage;
 
 		HudText (damage, transform.position + new Vector3 (0, 3.1f, 0));
+		print ("Archer-> x, y, z"+transform.position.x+" "+transform.position.y+" "+transform.position.z);
+
 
 		mHPContorl.Hit (damage);
 
@@ -177,10 +179,13 @@ public class ArcherControl : MonoBehaviour {
 	}
 
 	private void HudText(int damage, Vector3 pos){
-		GameObject prefab = Resources.Load ("HUDTEXT") as GameObject;
+		GameObject prefab = Resources.Load ("HudText 1") as GameObject;
 		GameObject hudtext = Instantiate (prefab, pos, Quaternion.identity) as GameObject;
 		
 		hudtext.GetComponent<HudText>().setHudText(damage.ToString(),new Color(255,255,255,255),30);
+		print ("1 monster-> x, y, z"+hudtext.transform.position.x+" "+hudtext.transform.position.y+" "+hudtext.transform.position.z);
+
+
 
 	}
 

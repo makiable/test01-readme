@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour {
 		mMonsterCount += 1;
 	
 		mMonster[idx].idx = idx;
-		mMonster[idx].RandomHP();//
+		mMonster[idx].RandomHp();//
 		monster.name = "Monster"+idx;
 		// 레이어 오더를 단계적으로 주어 몬스터들의 뎁스가 차례대로 겹치도록 한다.
 		monster.GetComponent<SpriteRenderer>().sortingOrder = idx+1;
@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour {
 	private void GetAutoTarget()
 	{
 		// Hp가 가장 낮은 몬스터를 타겟팅 합니다.
-		TargetMonster = mMonster.Where(m=>m.mHP > 0).OrderBy(m=>m.mHP).First();
+		TargetMonster = mMonster.Where(m=>m.mHp > 0).OrderBy(m=>m.mHp).First();
 		
 		// 타겟은 충돌체가 준비됩니다.
 		TargetMonster.SetTarget();

@@ -15,6 +15,7 @@ public class HudText : MonoBehaviour {
 	private void invisible(){
 		//textoutline의 컴포넌트의 dead함수를 호출하여 아웃라인을 제거합니다.
 		mOutline.dead ();
+		Destroy (gameObject);
 	}
 
 	private void dead(){
