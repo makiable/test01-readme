@@ -17,8 +17,6 @@ public class MonsterControl : MonoBehaviour{
 	// 몬스터가 발사할 파이어볼의 발사 지점
 	public Transform mFireShootSpot;
 
-	public Transform monsterHud;
-	
 	// 몬스터의 피격 설정을 위한 콜라이더
 	public Collider mCollider;
 	
@@ -75,11 +73,7 @@ public class MonsterControl : MonoBehaviour{
 		mHp -= damage;
 		mHpControl.Hit(damage);		
 
-		print ("1. transform.position="+transform.position);
-		
 		HudText(damage, transform.position + new Vector3(0, .7f, 0), archercontrol.IsCritical);
-
-		print ("2. transform.position="+transform.position);
 
 		mAnimator.SetTrigger("Damage");
 		

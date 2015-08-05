@@ -16,23 +16,83 @@ public class GameManager : MonoBehaviour {
 	// 몬스터 프리팹들을 인스턴스화 할 위치정보입니다.
 	public Transform[] mSpawnPoint;
 	
-	// 던전을 탐험하는 횟수입니다.
-	private int mLoopCount = 5;
+	//테스트 용도로 사용. 던전을 탐험하는 횟수입니다.
+	//private int mLoopCount = 5;
 	
 	// 화면에 나타난 적의 합
 	private int mMonsterCount = 0;
 	
 	// 얼마만큼 뛰다가 적을 만날 것인지.
 	private float mRunTime = 1.8f;
+
+	//초기화 함수.
+	private void Init(){
+		//로컬에 저장된 경험치 정보를 가지고 옵니다.
+		mExp = PlayerPrefs.GetInt ("2DP_EXP");
+
+		//경험치를 레벨로 환산.
+		int lv = getLevel (mExp);
+		mUserName.text = lv + ".Archer";
+
+		mMonsterCount = 0;
+		mMonsterKillCnt = 0;
+		mMonster = new List<MonsterControl> ();
+		mMonster.Clear ();
+	}
+
+	private int getLevel(int xp){
+		int sum = 0;
+		int i = 1;
+		while (true) {
+			sum += 1;
+			if (sum *mLevelBalance >= xp) return i;
+			i++;
+		}
+	}
+
 	
 	void Start () {
 		// 적 몬스터 들이 담길 List
-		mMonster = new List<MonsterControl>();
-		mMonster.Clear(); // 초기화..
+		//mMonster = new List<MonsterControl>();
+		//mMonster.Clear(); // 초기화..
+
+		//위에 꺼는 연습용.이번엔 진짜 초기화.
+		Init ();
+
 		// 던전 탐험 스텝을 만들어서 순서대로 순환시킵니다.
 		StartCoroutine("AutoStep");
 	}
+
+	//UI표시될 사항 정리.
+	public int mArcherLevel = 1;
+	public int mExp = 1;
+	public int mMonsterKillCnt;
+	public int mLevelBalance = 40; //경펌치에 사용될 변수.
+	public TextMesh mUserName ;
+
+
+	public void ContinueGame(){
+		//기존에 생성되어 있던 몬스터 파괴.
+		foreach (Transform spawn in mSpawnPoint) {
+			int childcount = spawn.childCount;
+			if (childcount > 0) {
+				Destroy(spawn.GetChild(0).gameObject);
+			}
+		}
+
+		//데이터를 초기화 하고, 현재 레벨 정보 아처에게 전달.
+		mStatus = Status.Idle;
+		int lv = getLevel (mExp);
+
+		Init();
+		//스텝을 다시 시작.
+		StartCoroutine("AutoStep");
+	}
+
+	//ResultPopup 컴포턴트가 있는 게임 오브젝트 참조.
+	public ResultPopup mResultPopup;
 	
+
 	// 던전의 현재 스텝
 	public enum Status
 	{
@@ -41,6 +101,7 @@ public class GameManager : MonoBehaviour {
 		BattleIdle,
 		Battle,
 		Clear,
+		GameOver
 	}
 	
 	public Status mStatus = Status.Idle;
@@ -155,21 +216,12 @@ public class GameManager : MonoBehaviour {
 		{
 			// 몬스터를 모두 클리어 하였습니다.
 			Debug.Log ("Clear");
-			
-			mLoopCount -= 1;
-			
+			if (mStatus == Status.GameOver) return;
+
 			// 모든 공격과 스텝을 중지시킵니다.
 			StopCoroutine("ArcherAttack");
 			StopCoroutine("MonsterAttack");
 			StopCoroutine("AutoStep");
-			
-			if(mLoopCount == 0)
-			{
-				// 모든 스테이지가 클리어 되었습니다.
-				Debug.Log("Stage All Clear");
-				GameOver();
-				return;
-			}
 			
 			// 던전 스텝을 초기화 시키고 다시 순환 시킵니다.
 			mStatus = Status.Idle;
@@ -198,11 +250,20 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 	}
+
+	public void SetEXP(){
+		mMonsterKillCnt++;
+		mExp += 5;
+		//경험치를 로컬에 저장.
+		PlayerPrefs.SetInt ("2DP_EXP", mExp);
+	}
 	
 	public void GameOver()
 	{
 		// 주인공이 사망했거나 모든 스테이지 클리어
 		Debug.Log("GameOver");	
+		mStatus = Status.GameOver;
+		mResultPopup.SetResult(mExp, mMonsterKillCnt);
 		StopCoroutine("ArcherAttack");
 		StopCoroutine("MonsterAttack");
 		StopCoroutine("AutoStep");

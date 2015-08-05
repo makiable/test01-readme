@@ -55,6 +55,8 @@
      <Compile Include="Assets\Script\HudText.cs" />
      <Compile Include="Assets\Script\LayerSort.cs" />
      <Compile Include="Assets\Script\MonsterControl.cs" />
+     <Compile Include="Assets\Script\MouseEventCatcher.cs" />
+     <Compile Include="Assets\Script\ResultPopup.cs" />
      <Compile Include="Assets\Script\RotateSimple.cs" />
      <Compile Include="Assets\Script\TextOutline.cs" />
      <Compile Include="Assets\Script\iTween.cs" />
