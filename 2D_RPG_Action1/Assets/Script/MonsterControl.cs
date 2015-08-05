@@ -12,6 +12,7 @@ public class MonsterControl : MonoBehaviour{
 	public int mHp;
 	public int mAttack;
 	public float mAttackSpeed;
+	//public text
 	
 	// 몬스터가 발사할 파이어볼의 발사 지점
 	public Transform mFireShootSpot;
@@ -77,7 +78,7 @@ public class MonsterControl : MonoBehaviour{
 		print ("1. transform.position="+transform.position);
 		
 		HudText(damage, transform.position + new Vector3(0, .7f, 0), archercontrol.IsCritical);
-		
+
 		print ("2. transform.position="+transform.position);
 
 		mAnimator.SetTrigger("Damage");
@@ -105,9 +106,13 @@ public class MonsterControl : MonoBehaviour{
 		if(isCritical)
 		{
 			hudtext.GetComponent<HudText>().SetHudText("Critical!!\n"+damage, new Color(255, 216, 0, 255), 35);
+			//hudtext.transform.Translate (Vector3.left * 2 * Time.deltaTime);
 		}
 		else{
-			hudtext.GetComponent<HudText>().SetHudText(damage.ToString(), new Color(0	, 0, 255, 255), 30);
+			hudtext.GetComponent<HudText>().SetHudText(damage.ToString(), new Color(0, 0, 255, 255), 30);
+			//A_Zone.transform.Translate (Vector3.left * Speed * Time.deltaTime)
+			//hudtext.transform.Translate (Vector3.left * 2 * Time.deltaTime);
+
 		}
 	}
 	

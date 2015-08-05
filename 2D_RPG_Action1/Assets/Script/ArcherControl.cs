@@ -15,8 +15,8 @@ public class ArcherControl : MonoBehaviour {
 	//화살이 발사 되는 지점(mAttackSpot)과 그 지점을 인스팩터에서 가린다.
 	[HideInInspector]
 	private Transform mAttackSpot;
-
-	public Transform mArcher_damage_Spot;
+	
+	//public Transform mArcher_damage_Spot;
 
 	//아처의 공격력, 채력, 공격 속도에 사용 될 변수.
 	public int mOrinHP;
@@ -148,6 +148,8 @@ public class ArcherControl : MonoBehaviour {
 		//데미지를 누적 시킵니다.
 		mHP -= damage;
 
+		//Text_Meter.text = string.Format("{0:N0}m",Meter);
+		//Damaged_Archer.text = string.Format ("(0:NO)", damage);
 
 		HudText (damage, transform.position + new Vector3 (0, 3.1f, 0));
 
