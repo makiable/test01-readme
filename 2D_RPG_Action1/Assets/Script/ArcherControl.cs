@@ -53,6 +53,8 @@ public class ArcherControl : MonoBehaviour {
 	[HideInInspector]
 	public Status mStatus = Status.Idle; //아처의 기본상태를 idle로 설정.
 
+	public ParticleSystem mSmoke;
+
 	// Use this for initialization
 	void Start () { 
 
@@ -109,6 +111,8 @@ public class ArcherControl : MonoBehaviour {
 			mAnimator.SetFloat("Speed", 0);
 			mBackgrounds.FlowControl(0);
 			mForegrounds.FlowControl(0);
+			mSmoke.Stop();
+
 			break;
 
 		case Status.Run:
@@ -116,6 +120,7 @@ public class ArcherControl : MonoBehaviour {
 			mHPContorl.Invisible();
 			mBackgrounds.FlowControl(1);
 			mForegrounds.FlowControl(1);
+			mSmoke.gameObject.SetActive(true);
 			break;
 
 		case Status.Dead:

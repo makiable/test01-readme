@@ -23,7 +23,13 @@ public class GameManager : MonoBehaviour {
 	private int mMonsterCount = 0;
 	
 	// 얼마만큼 뛰다가 적을 만날 것인지.
-	private float mRunTime = 1.8f;
+	private float mRunTime= 1.8f;
+
+	
+	
+	//ResultPopup 컴포턴트가 있는 게임 오브젝트 참조.
+	public ResultPopup mResultPopup;
+
 
 	//초기화 함수.
 	private void Init(){
@@ -73,10 +79,6 @@ public class GameManager : MonoBehaviour {
 	public int mLevelBalance = 40; //경펌치에 사용될 변수.
 	public TextMesh mUserName ;
 
-
-	//ResultPopup 컴포턴트가 있는 게임 오브젝트 참조.
-	public ResultPopup mResultPopup;
-	
 
 	// 던전의 현재 스텝
 	public enum Status

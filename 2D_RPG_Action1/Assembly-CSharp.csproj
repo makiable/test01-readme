@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Script\ArcherControl.cs" />
      <Compile Include="Assets\Script\ArrowControl.cs" />
+     <Compile Include="Assets\Script\AutoDestructShuriken.cs" />
      <Compile Include="Assets\Script\BackgroundControl.cs" />
      <Compile Include="Assets\Script\FireControl.cs" />
      <Compile Include="Assets\Script\GameManager.cs" />
