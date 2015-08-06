@@ -84,7 +84,7 @@ public class MonsterControl : MonoBehaviour{
 			mHp = 0;
 			mCollider.enabled = false;
 			mAnimator.SetTrigger("Die");
-			//mGameManager.SetEXP();
+			mGameManager.SetEXP();
 			mGameManager.ReAutoTarget();
 			Destroy(gameObject, 1f);
 		}

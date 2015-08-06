@@ -58,6 +58,9 @@ public class GameManager : MonoBehaviour {
 
 		//위에 꺼는 연습용.이번엔 진짜 초기화.
 		Init ();
+		int lv = getLevel (mExp);
+		mArcher.SetLeveling (lv);
+
 
 		// 던전 탐험 스텝을 만들어서 순서대로 순환시킵니다.
 		StartCoroutine("AutoStep");
@@ -70,24 +73,6 @@ public class GameManager : MonoBehaviour {
 	public int mLevelBalance = 40; //경펌치에 사용될 변수.
 	public TextMesh mUserName ;
 
-
-	public void ContinueGame(){
-		//기존에 생성되어 있던 몬스터 파괴.
-		foreach (Transform spawn in mSpawnPoint) {
-			int childcount = spawn.childCount;
-			if (childcount > 0) {
-				Destroy(spawn.GetChild(0).gameObject);
-			}
-		}
-
-		//데이터를 초기화 하고, 현재 레벨 정보 아처에게 전달.
-		mStatus = Status.Idle;
-		int lv = getLevel (mExp);
-
-		Init();
-		//스텝을 다시 시작.
-		StartCoroutine("AutoStep");
-	}
 
 	//ResultPopup 컴포턴트가 있는 게임 오브젝트 참조.
 	public ResultPopup mResultPopup;
@@ -257,6 +242,31 @@ public class GameManager : MonoBehaviour {
 		//경험치를 로컬에 저장.
 		PlayerPrefs.SetInt ("2DP_EXP", mExp);
 	}
+
+	public void ContinueGame(){
+
+		//아처 상태 리셋.
+		mArcher.Reborn ();
+
+		//기존에 생성되어 있던 몬스터 파괴.
+		foreach (Transform spawn in mSpawnPoint) {
+			int childcount = spawn.childCount;
+			if (childcount > 0) {
+				Destroy(spawn.GetChild(0).gameObject);
+			}
+		}
+		
+		//데이터를 초기화 하고, 현재 레벨 정보 아처에게 전달.
+		mStatus = Status.Idle;
+		int lv = getLevel (mExp);
+
+		mArcher.SetLeveling (lv);
+		
+		Init();
+		//스텝을 다시 시작.
+		StartCoroutine("AutoStep");
+	}
+
 	
 	public void GameOver()
 	{

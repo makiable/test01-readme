@@ -44,7 +44,8 @@ public class ArcherControl : MonoBehaviour {
 		Idle,
 		Run,
 		Attack,
-		Dead
+		Dead,
+		Reborn,
 	}
 
 	//public으로 선언 되었지만, 인스팩터 뷰에서 노출되지 않기를 원하는 경우 
@@ -125,9 +126,12 @@ public class ArcherControl : MonoBehaviour {
 		case Status.Attack:
 			mHPContorl.gameObject.SetActive(true);
 			mAnimator.SetTrigger("Shoot");
-
-
 			break;
+		
+		case Status.Reborn:
+			mAnimator.SetTrigger("Reborn");
+			break;
+		
 		}
 	}
 
@@ -189,6 +193,23 @@ public class ArcherControl : MonoBehaviour {
 		hudtext.GetComponent<HudText>().SetHudText(damage.ToString(), new Color(255,255,255,255),28);
 	
 
+	}
+
+	public void SetLeveling(int lv){
+		//레벨이 증가할때 마다 공격력을 증가 시킵니다.
+		int attack = 0;
+		for (int i = 1; i < lv; ++i) {
+			attack += i*5;
+		}
+		mAttack = mOrinAttack + attack;
+	}
+
+	public void Reborn(){
+		mStatus = Status.Idle;
+		mHP = mOrinHP;
+		mHPContorl.SetHp (mHP);
+		mHPContorl.Invisible ();
+		SetStatus (Status.Reborn, 0);
 	}
 
 }
