@@ -29,8 +29,8 @@ public class ArrowControl : MonoBehaviour {
 
 		if (other.tag == "Monster") {
 			mCollider.enabled = false;
-			mMonster.Hit(); //힛함수 실행.
-			Debug.Log ("name check");
+			mMonster.Hit(transform.position); //힛함수 실행.
+
 
 			//화살 오브젝트를 0.07초 후 파괴합니다.
 			Destroy(gameObject, 0.07f);

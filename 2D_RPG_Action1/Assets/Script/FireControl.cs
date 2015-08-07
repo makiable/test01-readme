@@ -27,8 +27,14 @@ public class FireControl : MonoBehaviour {
 		if (other.tag == "Player") {
 			int	damage = mMonster.mAttack;
 
+			ArrayList param = new ArrayList();
+
+			param.Add(damage);
+			param.Add(transform.position);
+
+
 			//mArcher 게임 오브젝트에 있는 모든 컴포넌트에 있는 함수 중 Hit 함수 호출.
-			mArcher.SendMessage("Hit",damage);
+			mArcher.SendMessage("Hit",param);
 
 			Destroy(gameObject, 0.07f);
 

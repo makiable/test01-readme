@@ -147,13 +147,29 @@ public class ArcherControl : MonoBehaviour {
 		arrow = Instantiate (mArrowPrefeb, mAttackSpot.position, Quaternion.identity) as GameObject;
 
 		arrow.SendMessage ("Shoot", mGameManager.TargetMonster);
+
+		MakeEffect ("Eff_BowLight", mAttackSpot.position + new Vector3 (0.75f, 0, 0), transform);
+
+		isCritical ();
+		if (IsCritical) {
+			//Eff_CriticalFire프리펩을 로드해서, Arrow의 자식으로 위치 시킵니다.
+			GameObject fire = MakeEffect ("Eff_CriticalFire", mAttackSpot.position + new Vector3(0.75f, 0, 0), arrow.transform);
+
+			//flre 프리펩은 비활성화 상태로 프리팹화 되었으므로 활성화 시켜줍니다.
+			fire.SetActive(true);
+		}
 	}
 
 	public int GetRandomDamage(){
 		return mAttack + Random.Range (0, 20);
 	}
 
-	public void Hit(int damage){
+	public void Hit(ArrayList param){
+
+		int damage = (int) param[0]; //
+
+		Debug.Log (damage);
+
 		//데미지를 누적 시킵니다.
 		mHP -= damage;
 
@@ -163,6 +179,8 @@ public class ArcherControl : MonoBehaviour {
 		HudText (damage, transform.position + new Vector3 (0, 3.1f, 0));
 
 		mHPContorl.Hit (damage);
+
+		MakeEffect ("Eff_Hit_Archer", (Vector3)param [1], transform);
 
 		if (mHP > 0) {
 			mAnimator.SetTrigger("Damaged");
@@ -181,7 +199,7 @@ public class ArcherControl : MonoBehaviour {
 
 	public void isCritical(){
 		int random = Random.Range (0, 10);
-		if (random < 2) {
+		if (random < 5) {
 			IsCritical = true;
 			Debug.Log("Critical");
 		}
@@ -215,6 +233,15 @@ public class ArcherControl : MonoBehaviour {
 		mHPContorl.SetHp (mHP);
 		mHPContorl.Invisible ();
 		SetStatus (Status.Reborn, 0);
+	}
+
+	private GameObject MakeEffect(string path, Vector3 pos, Transform _parents){
+		GameObject prefab = Resources.Load (path) as GameObject;
+		GameObject eff = Instantiate (prefab) as GameObject;
+
+		eff.transform.parent = _parents;
+		eff.transform.position = pos;
+		return eff;
 	}
 
 }

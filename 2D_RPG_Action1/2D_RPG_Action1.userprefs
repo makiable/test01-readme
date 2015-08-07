@@ -1,10 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\MonsterControl.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\ArcherControl.cs">
     <Files>
-      <File FileName="Assets\Script\AutoDestructShuriken.cs" Line="18" Column="24" />
-      <File FileName="..\..\..\Dropbox\Unity2D_RPG만들기\Sample\Chapter09\Assets\Script\AutoDestructShuriken.cs" Line="29" Column="4" />
-      <File FileName="Assets\Script\MonsterControl.cs" Line="30" Column="3" />
+      <File FileName="Assets\Script\ArcherControl.cs" Line="174" Column="17" />
+      <File FileName="Assets\Script\AutoDestructShuriken.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\MouseEventCatcher.cs" Line="9" Column="28" />
+      <File FileName="Assets\Script\MonsterControl.cs" Line="125" Column="35" />
+      <File FileName="Assets\Script\ArrowControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\FireControl.cs" Line="37" Column="37" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

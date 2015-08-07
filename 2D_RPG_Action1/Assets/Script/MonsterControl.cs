@@ -57,7 +57,7 @@ public class MonsterControl : MonoBehaviour{
 	}
 	
 	// 피격 당할 경우 데미지 처리와 애니메이션 처리
-	public void Hit()
+	public void Hit(Vector3 hitpos)
 	{
 		GameObject archer = GameObject.Find("Archer");	
 		ArcherControl archercontrol = archer.GetComponent<ArcherControl>();
@@ -73,6 +73,9 @@ public class MonsterControl : MonoBehaviour{
 		mHp -= damage;
 		mHpControl.Hit(damage);		
 
+		MakeEffect ("Eff_Hit", hitpos + new Vector3 (0.4f, 0.2f, 0), transform);
+		Debug.Log ("Eff_Hit");
+
 		HudText(damage, transform.position + new Vector3(0, .7f, 0), archercontrol.IsCritical);
 
 		mAnimator.SetTrigger("Damage");
@@ -86,6 +89,10 @@ public class MonsterControl : MonoBehaviour{
 			mAnimator.SetTrigger("Die");
 			mGameManager.SetEXP();
 			mGameManager.ReAutoTarget();
+
+			MakeEffect("Eff_Blood", transform.position + new Vector3(0, -1.5f, 0), GameObject.Find("FG_Depth0").transform);
+
+
 			Destroy(gameObject, 1f);
 		}
 	}
@@ -117,5 +124,12 @@ public class MonsterControl : MonoBehaviour{
 		GameObject fire = Instantiate(mFirePrefab, mFireShootSpot.position, Quaternion.identity) as GameObject;
 		fire.SendMessage("Shoot", this);
 		
+	}
+
+	private void MakeEffect(string path, Vector3 pos, Transform _parent){
+		GameObject prefab = Resources.Load (path) as GameObject;
+		GameObject eff = Instantiate (prefab) as GameObject;
+		eff.transform.position = pos;
+		eff.transform.parent = _parent;
 	}
 }
