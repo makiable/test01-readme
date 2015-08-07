@@ -153,11 +153,14 @@ public class ArcherControl : MonoBehaviour {
 		isCritical ();
 		if (IsCritical) {
 			//Eff_CriticalFire프리펩을 로드해서, Arrow의 자식으로 위치 시킵니다.
-			GameObject fire = MakeEffect ("Eff_CriticalFire", mAttackSpot.position + new Vector3(0.75f, 0, 0), arrow.transform);
+			GameObject fire = MakeEffect ("Eff_CriticalFire", mAttackSpot.position + new Vector3 (0.75f, 0, 0), arrow.transform);
 
 			//flre 프리펩은 비활성화 상태로 프리팹화 되었으므로 활성화 시켜줍니다.
-			fire.SetActive(true);
-		}
+			fire.SetActive (true);
+
+			MakeEffect ("Sound_Critical", Vector3.zero, transform);
+		} else
+			MakeEffect ("Sound_Arrow", Vector3.zero, transform);
 	}
 
 	public int GetRandomDamage(){
@@ -181,6 +184,8 @@ public class ArcherControl : MonoBehaviour {
 		mHPContorl.Hit (damage);
 
 		MakeEffect ("Eff_Hit_Archer", (Vector3)param [1], transform);
+
+		MakeEffect ("Sound_Hit", Vector3.zero, transform);
 
 		if (mHP > 0) {
 			mAnimator.SetTrigger("Damaged");
